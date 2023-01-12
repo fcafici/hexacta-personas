@@ -10,23 +10,29 @@
 
         public int Dni { get; set; }
 
-        public DateOnly FechaNacimiento { get; set; }
+        public int DiaNacimiento { get; set; }
+        public int MesNacimiento { get; set; }
+        public int AnioNacimiento { get; set; }
 
         public string CategoriaEtaria { get; set; }
 
-        public Persona(Guid id, string nombre, string apellido, int dni, DateOnly fechaNacimiento)
+        public Persona(Guid id, string nombre, string apellido, int dni, int diaNacimiento, int mesNacimiento, int anioNacimiento)
         {
             Id = id;    // no sé si lo necesita el ORM, por ahora lo dejo así.
             Nombre = nombre;
             Apellido = apellido;
             Dni = dni;
-            FechaNacimiento = fechaNacimiento;
+            DiaNacimiento = diaNacimiento;
+            MesNacimiento = mesNacimiento;
+            AnioNacimiento = anioNacimiento;
             this.CalcularCategoriaEtaria();
         }
 
+        public DateOnly FechaNacimiento() { return new DateOnly(AnioNacimiento, MesNacimiento, DiaNacimiento); }
+
         public int Edad()
         {
-            return FechaNacimiento.CompareTo(DateOnly.FromDateTime(DateTime.Now));
+            return FechaNacimiento().CompareTo(DateOnly.FromDateTime(DateTime.Now));
         }
 
         public void CalcularCategoriaEtaria()
