@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProyectoHexactaAPI.Controllers.models;
+using ProyectoHexactaAPI.Models;
 
 namespace ProyectoHexactaAPI.Persistence
 {
