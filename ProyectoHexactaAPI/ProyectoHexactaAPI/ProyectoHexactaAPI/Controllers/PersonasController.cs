@@ -25,19 +25,11 @@ namespace ProyectoHexactaAPI.Controllers
             return Ok(personas);
         }
 
-        /*[HttpGet]
-        public async Task<IActionResult> ObtenerPersonas(string nombre)
-        {
-            
-            
-            return Ok(personas);
-        }
-        */
-
         [HttpPost]
         public async Task<IActionResult> RegistrarPersona([FromBody] Persona personaRequest)
         {
             personaRequest.Id = Guid.NewGuid();
+            personaRequest.CalcularCategoriaEtaria();
             await proyectoHexactaDbContext.Personas.AddAsync(personaRequest);
             await proyectoHexactaDbContext.SaveChangesAsync();
 

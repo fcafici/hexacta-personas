@@ -3,22 +3,26 @@
     
     <div class="row">
         <div class="col-6">
-            <form #form="ngForm">
+            <form #form="ngForm" (ngSubmit)="agregarEmpleado()">
                 <div class="mb-3">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre">
+                    <input type="text" class="form-control" id="nombre" 
+                    name="nombre" [(ngModel)] = "agregarPersonaRequest.nombre">
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido">
+                    <input type="text" class="form-control" id="apellido"
+                    name="apellido" [(ngModel)] = "agregarPersonaRequest.apellido">
                 </div>
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI</label>
-                    <input type="number" class="form-control" id="dni">
+                    <input type="number" class="form-control" id="dni"
+                    name="dni" [(ngModel)] = "agregarPersonaRequest.dni">
                 </div>
                 <div class="mb-3">
                     <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" id="fechaNacimiento">
+                    <input type="date" class="form-control" id="fechaNacimiento"
+                    name="fechaNacimientoString" [(ngModel)] = "fechaNacimientoString">
                 </div>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </form>

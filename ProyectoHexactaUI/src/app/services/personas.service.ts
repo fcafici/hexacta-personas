@@ -15,4 +15,9 @@ export class PersonasService {
   getPersonas(): Observable<Persona[]> {
     return this.http.get<Persona[]>(this.baseApiUrl + '/api/personas');
   }
+
+  agregarPersona(agregarPersonaRequest: Persona): Observable<Persona> {
+    return this.http.post<Persona>(this.baseApiUrl + '/api/personas', 
+    agregarPersonaRequest);
+  }
 }
