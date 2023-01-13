@@ -17,12 +17,22 @@ namespace ProyectoHexactaAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ObtenerPersonas()
+        public async Task<IActionResult> ObtenerPersonas([FromQuery] string? nombre = "", [FromQuery] string? apellido = "")
         {
-            var personas = await proyectoHexactaDbContext.Personas.ToListAsync();
+
+            var personas = await proyectoHexactaDbContext.Personas.Where<Persona>(p => p.Nombre.Contains(nombre) && p.Apellido.Contains(apellido)).ToListAsync();
 
             return Ok(personas);
         }
+
+        /*[HttpGet]
+        public async Task<IActionResult> ObtenerPersonas(string nombre)
+        {
+            
+            
+            return Ok(personas);
+        }
+        */
 
         [HttpPost]
         public async Task<IActionResult> RegistrarPersona([FromBody] Persona personaRequest)

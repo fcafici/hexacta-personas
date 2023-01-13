@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Persona } from 'src/app/models/persona.model';
+import { PersonasService } from 'src/app/services/personas.service';
 
 @Component({
   selector: 'app-busqueda-personas',
@@ -8,20 +9,17 @@ import { Persona } from 'src/app/models/persona.model';
 })
 export class BusquedaPersonasComponent implements OnInit {
 
-  personas: Persona[] = [
-    { // borrar esta persona, es para ver que la tabla funcione
-      nombre: 'Juan',
-      apellido: 'Perez',
-      dni: 12345678,
-      fechaNacimiento: new Date('1990-01-01'),
-      categoriaEtaria: 'Adulto'
-    }
-  ];
-  constructor() { }
+  personas: Persona[] = []
+  constructor(private personasService: PersonasService) { }
 
   ngOnInit(): void {
-    // acá se tienen que pedir los empleados al modelo
-    this.personas.push()
+    this.personasService.getPersonas().subscribe({
+      next: (personas) => {
+        this.personas = personas;
+      },
+      error: (response) => {
+        console.log(response);
+      }
+    });
   }
-
 }
