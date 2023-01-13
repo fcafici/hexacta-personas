@@ -29,14 +29,13 @@ constructor(private personaService: PersonasService) {
   ngOnInit(): void {
   }
 
-  agregarEmpleado() {
+  agregarPersona() {
     this.fechaNacimiento = new Date(this.fechaNacimientoString);
     this.agregarPersonaRequest.diaNacimiento = this.fechaNacimiento.getDate() + 1;  // +1 porque el 0 es el primer dia del mes
     this.agregarPersonaRequest.mesNacimiento = this.fechaNacimiento.getMonth() + 1; // +1 porque el 0 es el primer mes del año
     this.agregarPersonaRequest.anioNacimiento = this.fechaNacimiento.getFullYear();
 
-    this.personaService.agregarPersona(this.agregarPersonaRequest)
-    .subscribe({
+    this.personaService.agregarPersona(this.agregarPersonaRequest).subscribe({
       next: (persona) => {
         console.log(persona);
       },

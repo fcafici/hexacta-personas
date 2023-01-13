@@ -12,8 +12,8 @@ export class PersonasService {
   baseApiUrl: string = environment.baseApiUrl;
   constructor(private http : HttpClient) { }
 
-  getPersonas(): Observable<Persona[]> {
-    return this.http.get<Persona[]>(this.baseApiUrl + '/api/personas');
+  getPersonas(queryParams: string): Observable<Persona[]> {
+    return this.http.get<Persona[]>(this.baseApiUrl + `/api/personas${queryParams ? queryParams : ''}`);
   }
 
   agregarPersona(agregarPersonaRequest: Persona): Observable<Persona> {

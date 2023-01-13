@@ -3,11 +3,16 @@
 
     <h2 class ="mb-1">Filtrar por nombre o apellido</h2>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text">Nombre y/o apellido</span>
-        <input type="text" aria-label="Nombre" class="form-control" placeholder="Nombre">
-        <input type="text" aria-label="Apellido" class="form-control" placeholder="Apellido">
-    </div>
+    <form #form="ngForm" (ngSubmit)="filtrarPersona()">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Nombre y/o apellido</span>
+            <input type="text" class="form-control" placeholder="Nombre" id="nombreAFiltrar"
+            name="nombreAFiltrar" [(ngModel)]="nombreAFiltrar">
+            <input type="text" class="form-control" placeholder="Apellido" id="apellidoAFiltrar"
+            name="apellidoAFiltrar" [(ngModel)]="apellidoAFiltrar">
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </div>
+    </form>
 
     <table class="table" *ngIf=" personas && personas.length > 0">
         <thead>
