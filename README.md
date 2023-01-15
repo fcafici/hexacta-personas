@@ -3,7 +3,7 @@
 ## Parte A
 Como se pidió, la aplicación está creada con Frontend en Angular + HTML, Backend en NET Core exponiendo una API REST y elegí usar base de datos SQL Server con Entity Framework como ORM.
 
-En el backend, las capas (presentación,  aplicación y datos) se pueden en la estructura de carpetas dentro de *ProyectoHexactaAPI*. Por un lado, en la carpeta *Controllers* tenemos el controlador que expone la API con sus dos métodos (GET y POST) para obtener y crear personas. Por otro lado, en la carpeta *Models* está la clase Persona propiamente dicha que, valga la redundancia, modela la persona de nuestra aplicación. Por último, en la carpeta *Persistence* está el DbContext de nuestro proyecto, que hereda de la clase DbContext y se usa para comunicarse con la base de datos.
+En el backend, las capas (presentación,  aplicación y datos) se pueden ver en la estructura de carpetas dentro de *ProyectoHexactaAPI*. Por un lado, en la carpeta *Controllers* tenemos el controlador que expone la API con sus dos métodos (GET y POST) para obtener y crear personas. Por otro lado, en la carpeta *Models* está la clase Persona propiamente dicha que, valga la redundancia, modela la persona de nuestra aplicación. Por último, en la carpeta *Persistence* está el DbContext específico de nuestro proyecto, que hereda de la clase DbContext y se usa para comunicarse con la base de datos.
 
 Se aplica la inyección de dependencias en el controlador, pasando el DbContext como parámetro al constructor de forma que si se quisiera modificar el mismo, no haría falta cambiar el controlador.
 
@@ -12,7 +12,7 @@ Una abstracción adicional que se podría haber hecho sería crear una clase **A
 ## Parte B
 La pantalla tiene los filtros de nombre y apellido que se mandan como query parameters al backend y luego se filtran con un WHERE en la base de datos.
 
-Hacer el filtro en el frontend y no a nivel base de datos implica menos accesos a la base de datos y menos requests HTTP (lo cual, en principio, ahorraría un poco de tiempo), así como una página web un poco más dinámica (no hay que recargar la página porque no hay una request de por medio) pero sería un problema si hubiera un gran volumen de personas. Esto se debe a que tendrían que traerse todas las personas de la base de datos al backend y del mismo al frontend (en caso contrario se pueden hacer pedidos paginados) y recién ahí se podría filtrar. Además, para volúmenes grandes de datos, un filtro a nivel base de datos es mucho más eficiente.
+Hacer el filtro en el frontend y no a nivel base de datos hubiera implicado menos accesos a la base de datos y menos requests HTTP (lo cual, en principio, ahorraría un poco de tiempo), así como una página web un poco más dinámica (no hay que recargar la página porque no hay una request de por medio) pero sería un problema si hubiera un gran volumen de personas. Esto se debe a que tendrían que traerse todas las personas de la base de datos al backend y del mismo al frontend (en caso contrario se pueden hacer pedidos paginados) y recién ahí se podría filtrar. Además, para volúmenes grandes de datos, un filtro a nivel base de datos es mucho más eficiente.
 
 ## Parte C
 Para las validaciones puse, en el frontend, un mínimo y máximo de caracteres en nombre y apellido, un mínimo y máximo numérico al DNI y un máximo a la fecha de nacimiento que debe ser anterior o igual al día presente. No hice una validación de edad mínima porque modelamos personas. Si hubiéramos modelado, por ejemplo, empleados, una validación de edad hubiese cobrado sentido. Al ser en el frontend, si no se cumplen los requisitos de las validaciones, ni siquiera se manda la request HTTP.
@@ -27,7 +27,7 @@ Por más que normalmente el rango etario lo modelaría como un método, necesita
 En cuanto a los tests unitarios, creé tres: uno que verifique que la fecha de nacimiento se esté guardando correctamente, otro que verifique que se calcule bien la edad, y por último uno que valide que se está asignando al rango etario correcto.
 
 ## Patrones de diseño
-Al ser un dominio tan acotado, me costó implementar patrones de diseño, sin embargo, pude identificar 
+Al ser un dominio tan acotado, me costó implementar patrones de diseño. Sin embargo, pude identificar 
 algunos.
 
  **- Inyección de dependencias:** si es que puede considerarse un patrón de diseño. Como mencioné en la parte A, se aplica pasando el DbContext como parámetro al constructor del PersonasController.
@@ -43,7 +43,7 @@ Un Object-Relational Mapper es un modelo que permite usar una base de datos abst
 
 Además, los ORM nos protegen de los SQL Injection, en los que alguien podría mandar (por ejemplo en un form) una sentencia de SQL y borrar o modificar tablas (como una de las posibles consecuencias). 
 
-Por otro lado, como no escribimos literalmente las consultas, pueden hacerse un poco ineficientes. También pueden ser un poco complejos de configurar inicialmente.
+Por otro lado, como no escribimos literalmente las consultas, pueden hacerse un poco ineficientes. También pueden ser algo complejos de configurar inicialmente.
 
  2. Diferencias entre: cliente de BD vs driver de conexión de BD vs motor de base de datos (Dar ejemplos)
 
@@ -52,7 +52,7 @@ Por ejemplo: si en un restaurant hay dos computadoras con un sistema gastronómi
 
 El driver es el programa que permite la conexión entre un cliente y el motor de la BD. Son los que implementan los protocolos de comuniación para ejecutar operaciones sobre la BD. SQL Server usa un driver ODBC (Open DataBase Connectivity)
 
-El motor de la base de datos es el software que usa el DBMS para ejecutar las operaciones CRUD (Create Read Update Delete). Algunos motores son el MS SQL Server, MySql, Oracle o PostgreSQL, pero hay muchos más.
+El motor de la base de datos es el software que usa el DBMS para ejecutar las operaciones CRUD (Create, Read, Update, Delete). Algunos motores son el MS SQL Server, MySql, Oracle o PostgreSQL, pero hay muchos más.
 
 3. ¿Qué es una API REST?
 
