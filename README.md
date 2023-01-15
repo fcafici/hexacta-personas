@@ -58,6 +58,6 @@ El motor de la base de datos es el software que usa el DBMS para ejecutar las op
 
 Una API REST es un tipo de API que configura rutas a las que se accede mediante métodos HTTP (GET, POST, PUT, PATCH, DELETE) y que suelen devolver archivos JSON (o XML).
 
-Entre las características de las API REST está el hecho de que cada ruta está orientada a un recurso, no tanto a una acción. Por ejemplo GET "/personas".
+Entre las características de las API REST está el hecho de que cada ruta está orientada a un recurso, no tanto a una acción. Por ejemplo GET "/personas". También cabe aclarar que una de las claves de REST es que es *stateless*, es decir, el sistema no recuerda requests anteriores.
 
 Todo esto difiere de las API SOAP, que se hacen mediante un POST siempre a la misma ruta y las operaciones e información se mandan en el cuerpo del mensaje (en XML).
