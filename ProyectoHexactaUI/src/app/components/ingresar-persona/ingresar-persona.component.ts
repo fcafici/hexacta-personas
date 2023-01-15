@@ -30,12 +30,14 @@ export class IngresarPersonaComponent implements OnInit {
 
   fechaNacimientoString: string = '';
 
-  // estaría bueno hacer una lista con estas validaciones y recorrerla para validar
-  // voy a ver que ande así y después intentar mejorarlo.
-  nombreValido: boolean = false;
-  apellidoValido: boolean = false;
-  dniValido: boolean = false;
-  fechaNacimientoValida: boolean = false;
+
+
+  validaciones: Map<string, boolean> = new Map<string, boolean>([
+    ['nombre', false],
+    ['apellido', false],
+    ['dni', false],
+    ['fechaNacimiento', false]
+  ]);
 
 constructor(private personaService: PersonasService, private router: Router) {
 
@@ -74,8 +76,8 @@ validarFechaPasada(fechaString : string) : boolean {
   }
 
   validRequest() : boolean {
-    // lo correcto sería que las validaciones sean parte de una lista y hacer un validaciones.all({v => v == true}) o algo por el estilo
-    return this.nombreValido && this.apellidoValido && this.dniValido && this.fechaNacimientoValida;
+    return Array.from(this.validaciones.values()).every(v => v == true);
+    // de esta forma, pueden agregarse validaciones al diccionario y este método sigue funcionando.
   }
 
   agregarPersona() {

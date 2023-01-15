@@ -8,29 +8,29 @@
                     <label for="nombre" class="form-label">Nombre</label>
                     <input type="text" class="form-control" id="nombre" 
                     name="nombre" [(ngModel)] = "agregarPersonaRequest.nombre"
-                    (input)="nombreValido = validarLongitud(agregarPersonaRequest.nombre)">
-                    <span *ngIf="!nombreValido" class="text-danger">El nombre es inválido</span>
+                    (input)="validaciones.set('nombre',  validarLongitud(agregarPersonaRequest.nombre))">
+                    <span *ngIf="!validaciones.get('nombre')" class="text-danger">El nombre es inválido</span>
                 </div>
                 <div class="mb-3">
                     <label for="apellido" class="form-label">Apellido</label>
                     <input type="text" class="form-control" id="apellido"
                     name="apellido" [(ngModel)] = "agregarPersonaRequest.apellido"
-                    (input)="apellidoValido = validarLongitud(agregarPersonaRequest.apellido)">
-                    <span *ngIf="!apellidoValido" class="text-danger">El apellido es inválido</span>
+                    (input)="validaciones.set('apellido',validarLongitud(agregarPersonaRequest.apellido))">
+                    <span *ngIf="!validaciones.get('apellido')" class="text-danger">El apellido es inválido</span>
                 </div>
                 <div class="mb-3">
                     <label for="dni" class="form-label">DNI</label>
                     <input type="number" class="form-control" id="dni"
                     name="dni" [(ngModel)] = "agregarPersonaRequest.dni"
-                    (input)="dniValido = validarDni(agregarPersonaRequest.dni)" >
-                    <span *ngIf="!dniValido" class="text-danger">El DNI es inválido</span>
+                    (input)="validaciones.set('dni', validarDni(agregarPersonaRequest.dni))" >
+                    <span *ngIf="!validaciones.get('dni')" class="text-danger">El DNI es inválido</span>
                 </div>
                 <div class="mb-3">
                     <label for="fechaNacimiento" class="form-label">Fecha de nacimiento</label>
                     <input type="date" class="form-control" id="fechaNacimiento"
                     name="fechaNacimientoString" [(ngModel)] = "fechaNacimientoString"
-                    (change)="fechaNacimientoValida = validarFechaPasada(fechaNacimientoString)">
-                    <span *ngIf="!fechaNacimientoValida" class="text-danger">La fecha de nacimiento es inválida</span>
+                    (change)="validaciones.set('fechaNacimiento', validarFechaPasada(fechaNacimientoString))">
+                    <span *ngIf="!validaciones.get('fechaNacimiento')" class="text-danger">La fecha de nacimiento es inválida</span>
                 </div>
                 <button type="submit" class="btn btn-primary">Ingresar</button>
             </form>
